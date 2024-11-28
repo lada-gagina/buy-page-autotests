@@ -1,9 +1,11 @@
 import {test, expect} from '@playwright/test';
 
-let product = [
-    {address: 'idea', name: 'IntelliJ IDEA', price_yearly: '€599.00', price_monthly: '€59.90'},
-    {address: 'pycharm', name: 'PyCharm', price_yearly: '€249.00', price_monthly: '€24.90'}
-] // todo lada add more products
+test.beforeEach(async ({context}) => {
+    const cookieConsent = {
+        name: 'jb_cookies_consent_closed', value: 'true', url: 'https://.jetbrains.com/',
+    }
+    await context.addCookies([cookieConsent])
+})
 
 product.forEach(
     (product) => {
