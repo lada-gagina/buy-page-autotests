@@ -8,10 +8,78 @@ test.beforeEach(async ({context}) => {
 })
 
 let product = [{
-    address: 'idea', name: 'IntelliJ IDEA', price_yearly: '€599.00', price_monthly: '€59.90', product_card_id: 'IntelliJ-IDEA-Ultimate'
+    address: 'idea',
+    name: 'IntelliJ IDEA',
+    price_yearly: '€599.00',
+    price_monthly: '€59.90',
+    product_card_id: 'IntelliJ-IDEA-Ultimate'
 }, {
-    address: 'pycharm', name: 'PyCharm', price_yearly: '€249.00', price_monthly: '€24.90', product_card_id: 'PyCharm-Professional'
-}] // todo lada add more products
+    address: 'pycharm',
+    name: 'PyCharm',
+    price_yearly: '€249.00',
+    price_monthly: '€24.90',
+    product_card_id: 'PyCharm-Professional'
+}, {
+    address: 'clion',
+    name: 'CLion',
+    price_yearly: '€229.00',
+    price_monthly: '€22.90',
+    product_card_id: 'CLion'
+}, {
+    address: 'rider',
+    name: 'Rider',
+    price_yearly: '€149.00',
+    price_monthly: '€14.90',
+    product_card_id: 'Rider-Commercial'
+}, {
+    address: 'datagrip',
+    name: 'DataGrip',
+    price_yearly: '',
+    price_monthly: '',
+    product_card_id: 'DataGrip'
+}, {
+    address: 'goland',
+    name: 'GoLand',
+    price_yearly: '',
+    price_monthly: '',
+    product_card_id: 'GoLand'
+}, {
+    address: 'webstorm',
+    name: 'WebStorm',
+    price_yearly: '',
+    price_monthly: '',
+    product_card_id: 'WebStorm'
+}, {
+    address: 'phpstorm',
+    name: 'PhpStorm',
+    price_yearly: '',
+    price_monthly: '',
+    product_card_id: 'PhpStorm'
+}, {
+    address: 'aqua',
+    name: 'Aqua',
+    price_yearly: '€249.00',
+    price_monthly: '',
+    product_card_id: 'Aqua'
+}, {
+    address: 'rubymine',
+    name: 'RubyMine',
+    price_yearly: '',
+    price_monthly: '',
+    product_card_id: 'RubyMine'
+}, {
+    address: 'rust',
+    name: 'RustRover',
+    price_yearly: '€69.00',
+    price_monthly: '€6.90',
+    product_card_id: 'RustRover'
+}, {
+    address: 'dataspell',
+    name: 'DataSpell',
+    price_yearly: '€229.00',
+    price_monthly: '€22.90',
+    product_card_id: 'DataSpell'
+},] // todo lada add more products
 
 product.forEach((product) => {
     test(`title starts with Buy ${product.name}`, async ({page}) => {
