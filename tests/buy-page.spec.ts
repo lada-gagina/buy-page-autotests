@@ -73,4 +73,31 @@ product.forEach((product) => {
         await page.goBack();
     })
 
+    test(`${product.name} page has a subscription category switcher`, async ({page}) => {
+        await page.goto(`https://www.jetbrains.com/${product.address}/buy/`);
+
+        await page.getByRole('button', {name: 'For Organizations'}).click();
+        const productCardsOrg = await page.getByTestId(`product-card-${product.product_card_id}`).all();
+
+        let orgPrice
+        for (const productCard of productCardsOrg) {
+            if (await productCard.isVisible()) {
+                orgPrice = await productCard.getByTestId("product-price").textContent();
+            }
+        }
+        let indPrice
+        await page.getByRole('button', {name: 'For Individual Use'}).click();
+        await page.waitForTimeout(200)
+        const productCardsInd = await page.getByTestId(`product-card-${product.product_card_id}`).all();
+        for (const productCard of productCardsInd) {
+            console.log(await productCard.isVisible())
+            if (await productCard.isVisible()) {
+                indPrice = await productCard.getByTestId("product-price").textContent();
+                console.log(await productCard.getByTestId("product-price").textContent())
+            }
+        }
+        expect(orgPrice).not.toEqual(indPrice);
+    })
+})
+
 
