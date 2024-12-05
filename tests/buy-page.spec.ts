@@ -23,7 +23,8 @@ product.forEach((product) => {
     test(`${product.name} page has \'Subscription Options and Pricing\' heading`, async ({page}) => {
         await page.goto(`https://www.jetbrains.com/${product.address}/buy/`);
 
-        await expect(page.getByRole('heading', {name: 'Subscription Options and Pricing'})).toBeVisible();
+        await expect(page.getByRole('heading', {name: 'Subscription Options and Pricing'})
+            .or(page.getByRole('heading', {name: 'Subscription Plans'}))).toBeVisible();
     })
 
     test(`${product.name} page has 'Buy' buttons`, async ({page}) => {
@@ -33,7 +34,6 @@ product.forEach((product) => {
         expect(buyButtons).toHaveLength(2);
         for (const buyButton of buyButtons) {
             await buyButton.click();
-            await page.goForward();
             await expect(page).toHaveTitle('JetBrains eStore');
             await page.goBack();
         }
@@ -43,10 +43,10 @@ product.forEach((product) => {
         await page.goto(`https://www.jetbrains.com/${product.address}/buy/`);
 
         await page.getByRole('button', {name: 'Yearly billing'}).click()
-        await expect(page.getByTestId('product-price').first()).toHaveText(product.price_yearly);
+        await expect(page.getByTestId(`product-card-${product.product_card_id}`).getByTestId('product-price').first()).toHaveText(product.price_yearly);
 
         await page.getByRole('button', {name: 'Monthly billing'}).click();
-        await expect(page.getByTestId('product-price').first()).toHaveText(product.price_monthly);
+        await expect(page.getByTestId(`product-card-${product.product_card_id}`).getByTestId('product-price').first()).toHaveText(product.price_monthly);
     })
 
     test(`${product.name} page has 'Get quote' links`, async ({page}) => {
@@ -56,7 +56,6 @@ product.forEach((product) => {
         expect(getQuoteLinks).toHaveLength(2);
         for (const link of getQuoteLinks) {
             await link.click();
-            await page.goForward();//todo
             await expect(page).toHaveTitle('JetBrains eStore');
             await page.goBack();
         }
