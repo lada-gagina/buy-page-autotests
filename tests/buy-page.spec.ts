@@ -79,7 +79,7 @@ let product = [{
     price_yearly: '€229.00',
     price_monthly: '€22.90',
     product_card_id: 'DataSpell'
-},] // todo lada add more products
+},]
 
 product.forEach((product) => {
     test(`title starts with Buy ${product.name}`, async ({page}) => {
